@@ -34,9 +34,68 @@
 
 <?php
 
+	// Include Files
+
 	include 'functions.php';
 	include 'tasks.php';
-		
+
+	// Check Files
+	
+	$percentagecount1 = 0;
+
+	$javascriptjs = './javascript.js';
+	$stylecss = './style.css';
+	$functionsphp = './functions.php';
+	$tasksphp = './tasks.php';
+	$addtaskphp = './addtask.php';
+	$deletetaskphp = './deletetask.php';
+	$addsubtaskphp = './addsubtask.php';
+	$deletesubtaskphp = './deletesubtask.php';
+	$batcheck = './bat/cpuId.bat';
+	$imgcheck = './img/config/add.png';
+
+	if (file_exists($javascriptjs)) {
+		$percentagecount1 += 10;
+	}
+	
+	if (file_exists($stylecss)) {
+		$percentagecount1 += 10;
+	}
+	
+	if (file_exists($functionsphp)) {
+		$percentagecount1 += 10;
+	}
+	
+	if (file_exists($tasksphp)) {
+		$percentagecount1 += 10;
+	}
+	
+	if (file_exists($addtaskphp)) {
+		$percentagecount1 += 10;
+	}
+	
+	if (file_exists($deletetaskphp)) {
+		$percentagecount1 += 10;
+	}
+	
+	if (file_exists($addsubtaskphp)) {
+		$percentagecount1 += 10;
+	}
+	
+	if (file_exists($deletesubtaskphp)) {
+		$percentagecount1 += 10;
+	}
+	
+	if (file_exists($batcheck)) {
+		$percentagecount1 += 10;
+	}
+	
+	if (file_exists($imgcheck)) {
+		$percentagecount1 += 10;
+	}
+
+	// Sorting Function
+
 	if (isset($_POST["sortButton"])) {
 		
 		if (isset($_POST["sortime"])) {
@@ -62,6 +121,14 @@
 	$subtasks = new Subtasks();
 	$subtasks_each = $subtasks->getSubtasks();
 
+	// Count Tasks
+	
+	$taskcount = 0;
+	
+	foreach ($tasks_each as $task) {
+		$taskcount++;
+	}
+	
 ?>
 
 <form method='post' id='form_size'>
@@ -125,34 +192,81 @@
 
 		<div class="status-progress-flex">
 			<div class="status-progress-flex-each">	
-				<div class="progress">
-					<span class="title timer" data-from="0" data-to="85" data-speed="1800">85</span>
+				<div class="progress progress-animation-1">
+					<span class="title timer" data-from="0" data-to="<?php echo $percentagecount1; ?>" data-speed="1800"><?php echo $percentagecount1; ?></span>
 					<div class="overlay"></div>
 					<div class="left"></div>
 					<div class="right"></div>
 				</div>
-				<p class="status-progress-flex-each-title">School</p>
-				<p class="status-progress-flex-each-desc">Small description</p>
+				<p class="status-progress-flex-each-title">System Status</p>
+				<p class="status-progress-flex-each-desc">Filesystem</p>
+				
+				<style>
+				
+				@keyframes load1-1 {
+					0% {transform: rotate(0deg);}
+
+					100% {transform: rotate(180deg);}
+				}
+
+				@keyframes load1-2 {
+					0% {z-index: 100;transform: rotate(180deg);}
+
+					100% {z-index: 100;transform: rotate(270deg);}
+				}
+				
+				@keyframes load1-3 {
+					0% {z-index: 100;transform: rotate(180deg);}
+
+					100% {
+						z-index: 100;transform: rotate(<?php echo $percentagecount1*3.6; ?>deg);}
+				}
+				
+				</style>
 			</div>
 			<div class="status-progress-flex-each">
-				<div class="progress">
+				<div class="progress progress-animation-2">
 					<span class="title timer" data-from="0" data-to="85" data-speed="1800">85</span>
 					<div class="overlay"></div>
 					<div class="left"></div>
 					<div class="right"></div>
 				</div>
-				<p class="status-progress-flex-each-title">Blender</p>
-				<p class="status-progress-flex-each-desc">Small description</p>
+				<p class="status-progress-flex-each-title">Projects</p>
+				<p class="status-progress-flex-each-desc">Progress</p>
 			</div>
 			<div class="status-progress-flex-each">
-				<div class="progress">
-					<span class="title timer" data-from="0" data-to="85" data-speed="1800">85</span>
+				<div class="progress progress-animation-3">
+					<span class="title timer" data-from="0" data-to="<?php echo $taskcount*10; ?>" data-speed="1800"><?php echo $taskcount*10; ?></span>
 					<div class="overlay"></div>
 					<div class="left"></div>
 					<div class="right"></div>
 				</div>
-				<p class="status-progress-flex-each-title">Other</p>
-				<p class="status-progress-flex-each-desc">Small description</p>
+				<p class="status-progress-flex-each-title">Tasks</p>
+				<p class="status-progress-flex-each-desc">Remaining</p>
+				
+				<style>
+				
+				@keyframes load3-1 {
+					0% {transform: rotate(0deg);}
+
+					100% {transform: rotate(<?php echo $taskcount*10; ?>deg);}
+				}
+
+				@keyframes load3-2 {
+					0% {z-index: 100;transform: rotate(0deg);}
+
+					100% {z-index: 100;transform: rotate(<?php echo $taskcount*10; ?>deg);}
+				}
+				
+				@keyframes load3-3 {
+					0% {z-index: 100;transform: rotate(0deg);}
+
+					100% {
+						z-index: 100;transform: rotate(<?php echo $taskcount*10; ?>deg);}
+				}
+				
+				</style>
+				
 			</div>
 		</div>
 		
@@ -405,32 +519,62 @@
 			
 				<label>
 					<input type="radio" name="sortstatus" value=5>
-					<img src='./img/config/status-5.png'/>
+					<?php if($sortstatus == 5) {
+						echo "<img class='tasks-sort-checked-round' src='./img/config/status-5.png'/>";
+					} else {
+						echo "<img src='./img/config/status-5.png'/>";
+					}
+					?>
 				</label>
 			
 				<label>
 					<input type="radio" name="sortstatus" value=4>
-					<img src='./img/config/status-4.png'/>
+					<?php if($sortstatus == 4) {
+						echo "<img class='tasks-sort-checked-round' src='./img/config/status-4.png'/>";
+					} else {
+						echo "<img src='./img/config/status-4.png'/>";
+					}
+					?>
 				</label>
 				
 				<label>
 					<input type="radio" name="sortstatus" value=0>
-					<img src='./img/config/status-0.png'/>
+					<?php if($sortstatus == 0) {
+						echo "<img class='tasks-sort-checked-round' src='./img/config/status-0.png'/>";
+					} else {
+						echo "<img src='./img/config/status-0.png'/>";
+					}
+					?>
 				</label>
 				
 				<label>
 					<input type="radio" name="sortstatus" value=1>
-					<img src='./img/config/status-1.png'/>
+					<?php if($sortstatus == 1) {
+						echo "<img class='tasks-sort-checked-round' src='./img/config/status-1.png'/>";
+					} else {
+						echo "<img src='./img/config/status-1.png'/>";
+					}
+					?>
 				</label>
 				
 				<label>
 					<input type="radio" name="sortstatus" value=2>
-					<img src='./img/config/status-2.png'/>
+					<?php if($sortstatus == 2) {
+						echo "<img class='tasks-sort-checked-round' src='./img/config/status-2.png'/>";
+					} else {
+						echo "<img src='./img/config/status-2.png'/>";
+					}
+					?>
 				</label>
 				
 				<label>
 					<input type="radio" name="sortstatus" value=3>
-					<img src='./img/config/status-3.png'/>
+					<?php if($sortstatus == 3) {
+						echo "<img class='tasks-sort-checked-round' src='./img/config/status-3.png'/>";
+					} else {
+						echo "<img src='./img/config/status-3.png'/>";
+					}
+					?>
 				</label>
 			
 			</div>
@@ -441,12 +585,26 @@
 				
 				<label>
 					<input type="radio" name="sortime" value=1>
-					<p>Recent</p>
+					
+					<?php if($sortime == 1) {
+						echo "<p class='tasks-sort-checked-square'>Recent</p>";
+					} else {
+						echo "<p>Recent</p>";
+					}
+					?>
+					
 				</label>
 				
 				<label>
 					<input type="radio" name="sortime" value=0>
-					<p>Oldest</p>
+					
+					<?php if($sortime == 0) {
+						echo "<p class='tasks-sort-checked-square'>Oldest</p>";
+					} else {
+						echo "<p>Oldest</p>";
+					}
+					?>
+					
 				</label>
 
 				<input type="submit" name="sortButton" value="Filter">
@@ -491,7 +649,7 @@
 				
 				<div class="tasks-each-content">
 					
-					<img class="tasks-each-image" src="img/tasks/<?php echo $task['image']?>"/>
+					<!--<img class="tasks-each-image" src="img/tasks/<?php echo $task['image']?>"/>-->
 					<p class="tasks-each-subtitle"><?php echo $task['subtitle']?></p>
 					<p class="tasks-each-description"><?php echo $task['description']?></p>
 		
@@ -525,9 +683,15 @@
 								
 								echo "<div class='subtasks-each-content'>";
 								
-									echo "<p class='subtasks-each-subtitle'>".$subtask['subtitle']."</p>";
-									echo "<a class='subtasks-each-link' href='".$subtask['link']."'>Link</a>";
-									echo "<img class='subtasks-each-image' src='img/tasks/".$subtask['image']."'/>";
+									if ($subtask['subtitle'] == !0) {
+										echo "<p class='subtasks-each-subtitle'>".$subtask['subtitle']."</p>";
+									}
+								
+									if ($subtask['link'] == !0) {
+										echo "<a class='subtasks-each-link' href='".$subtask['link']."'>Link</a>";
+									}
+
+									//echo "<img class='subtasks-each-image' src='img/tasks/".$subtask['image']."'/>";
 									
 									echo "<div class='subtasks-edit'>";
 										echo "<form action='editsubtask.php' method='post'>";
