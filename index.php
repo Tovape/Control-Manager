@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="es-ES">
 	<link rel="icon" href="svg/logo.svg" type="image/gif" sizes="16x16">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="global.css">
+	<link rel="stylesheet" type="text/css" href="elements.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap" rel="stylesheet">
@@ -15,7 +16,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.2.0/quicklink.umd.js"></script>
 	<script type="text/javascript" src="javascript.js"></script>
-	
 	<script>
 	
 	// Windows Size
@@ -37,8 +37,9 @@
 	// Include Files
 
 	include 'functions.php';
-	include 'tasks.php';
-
+	include './tasks/tasks.php';
+	include './timer/timer.php';
+	
 	// Check Files
 	
 	$percentagecount1 = 0;
@@ -94,7 +95,7 @@
 		$percentagecount1 += 10;
 	}
 
-	// Sorting Function
+	// Sorting Tasks Function
 
 	if (isset($_POST["sortButton"])) {
 		
@@ -115,6 +116,8 @@
 		$sortstatus = null;
 	}
 	
+	// Task Creator
+	
 	$tasks = new Tasks();
 	$tasks_each = $tasks->getTasks($sortime, $sortstatus);
 
@@ -128,6 +131,11 @@
 	foreach ($tasks_each as $task) {
 		$taskcount++;
 	}
+	
+	// Timer Creator
+	
+	$timer = new Timer();
+	$timer_each = $timer->getTimer();
 	
 ?>
 
@@ -149,18 +157,35 @@
 			<div class="nav-link-each-border selector" data-filter="status">
 				<i class="fas fa-signal"></i>
 				<span class="nav-link-text">Status</span>
+				<span class="nav-link-hover">Status</span>
 			</div>
 		</li>
 		<li class="nav-link-each projects" id="projects-selector">
 			<div class="nav-link-each-border selector" data-filter="projects">
 				<i class="fas fa-project-diagram"></i>
 				<span class="nav-link-text">Projects</span>
+				<span class="nav-link-hover">Projects</span>
+			</div>
+		</li>
+		<li class="nav-link-each timer" id="timer-selector">
+			<div class="nav-link-each-border selector" data-filter="timer">
+				<i class="fas fa-clock"></i>
+				<span class="nav-link-text">Timer</span>
+				<span class="nav-link-hover">Timer</span>
+			</div>
+		</li>
+		<li class="nav-link-each weather" id="timer-selector">
+			<div class="nav-link-each-border selector" data-filter="weather">
+				<i class="fas fa-cloud-sun"></i>
+				<span class="nav-link-text">Weather</span>
+				<span class="nav-link-hover">Weather</span>
 			</div>
 		</li>
 		<li class="nav-link-each tasks" id="tasks-selector">
 			<div class="nav-link-each-border selector" data-filter="tasks">
 				<i class="fas fa-tasks"></i>
 				<span class="nav-link-text">Tasks</span>
+				<span class="nav-link-hover">Tasks</span>
 			</div>
 		</li>
 	</ul>
@@ -192,81 +217,25 @@
 
 		<div class="status-progress-flex">
 			<div class="status-progress-flex-each">	
-				<div class="progress progress-animation-1">
-					<span class="title timer" data-from="0" data-to="<?php echo $percentagecount1; ?>" data-speed="1800"><?php echo $percentagecount1; ?></span>
-					<div class="overlay"></div>
-					<div class="left"></div>
-					<div class="right"></div>
+				<div class="progress">
+					<div role="progressbar" aria-valuenow="<?php echo $percentagecount1; ?>" aria-valuemin="0" aria-valuemax="<?php echo $percentagecount1; ?>" style="--value: <?php echo $percentagecount1; ?>"></div>
 				</div>
 				<p class="status-progress-flex-each-title">System Status</p>
 				<p class="status-progress-flex-each-desc">Filesystem</p>
-				
-				<style>
-				
-				@keyframes load1-1 {
-					0% {transform: rotate(0deg);}
-
-					100% {transform: rotate(180deg);}
-				}
-
-				@keyframes load1-2 {
-					0% {z-index: 100;transform: rotate(180deg);}
-
-					100% {z-index: 100;transform: rotate(270deg);}
-				}
-				
-				@keyframes load1-3 {
-					0% {z-index: 100;transform: rotate(180deg);}
-
-					100% {
-						z-index: 100;transform: rotate(<?php echo $percentagecount1*3.6; ?>deg);}
-				}
-				
-				</style>
 			</div>
 			<div class="status-progress-flex-each">
 				<div class="progress progress-animation-2">
-					<span class="title timer" data-from="0" data-to="85" data-speed="1800">85</span>
-					<div class="overlay"></div>
-					<div class="left"></div>
-					<div class="right"></div>
+					<div role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="45" style="--value: 45"></div>
 				</div>
 				<p class="status-progress-flex-each-title">Projects</p>
 				<p class="status-progress-flex-each-desc">Progress</p>
 			</div>
 			<div class="status-progress-flex-each">
 				<div class="progress progress-animation-3">
-					<span class="title timer" data-from="0" data-to="<?php echo $taskcount*10; ?>" data-speed="1800"><?php echo $taskcount*10; ?></span>
-					<div class="overlay"></div>
-					<div class="left"></div>
-					<div class="right"></div>
+					<div role="progressbar" aria-valuenow="<?php echo $$taskcount*10; ?>" aria-valuemin="0" aria-valuemax="<?php echo $taskcount*10; ?>" style="--value: <?php echo $taskcount*10; ?>"></div>
 				</div>
 				<p class="status-progress-flex-each-title">Tasks</p>
 				<p class="status-progress-flex-each-desc">Remaining</p>
-				
-				<style>
-				
-				@keyframes load3-1 {
-					0% {transform: rotate(0deg);}
-
-					100% {transform: rotate(<?php echo $taskcount*10; ?>deg);}
-				}
-
-				@keyframes load3-2 {
-					0% {z-index: 100;transform: rotate(0deg);}
-
-					100% {z-index: 100;transform: rotate(<?php echo $taskcount*10; ?>deg);}
-				}
-				
-				@keyframes load3-3 {
-					0% {z-index: 100;transform: rotate(0deg);}
-
-					100% {
-						z-index: 100;transform: rotate(<?php echo $taskcount*10; ?>deg);}
-				}
-				
-				</style>
-				
 			</div>
 		</div>
 		
@@ -480,12 +449,212 @@
 		
 	</div>
 	
+	<div class="itemBox timer" id="timer">
+		<div class="section">
+			<p>Timer</p>
+		</div>
+		
+		<div class="tasks-add timer-background">
+			<form action="addtimer.php" method="post">
+				<div class="tasks-add-banner">
+					<img src='./img/config/add.png'/>
+					<input type="text" id="timertitle" name="timertitle" placeholder="Title" required>
+					<input type="text" id="timerlink" name="timerlink" placeholder="Link">
+				</div>
+				
+				<textarea id="timerdesc" name="timerdesc" rows="4" cols="50" placeholder="Description"></textarea>
+				
+				<select id="timertype" name="timertype">
+					<option value=0>Ocasional</option>
+					<option value=1>Rutinary</option>
+				</select>
+				
+				<input type="month" id="timerOcasional" name="timerOcasional">
+								
+				<select id="timerRutinary" name="timerRutinary">
+					<option value=0>Weekly</option>
+					<option value=1>Every 1 Month</option>
+					<option value=2>Every 2 Month</option>
+					<option value=3>Every 4 Month</option>
+					<option value=4>Every 8 Month</option>
+					<option value=5>Yearly</option>
+				</select>
+				
+				<input type="submit" name="submit" value="Add">
+			</form>
+		</div>
+		
+		
+		<div class="tasks-flex">
+	
+			<?php 
+			
+			foreach ($timer_each as $timer): ?>
+			
+			<div class="tasks-each">
+				<div class="tasks-each-banner">
+				
+					<div class="tasks-each-banner-sub">
+						<img src="img/timer/clock.png">
+						<p class="tasks-each-title"><?php echo $timer['title'];
+
+						if ($timer['rutine'] != 0) {
+								echo " | ".getFrequency($timer['rutine']);
+							} else if (!is_null($timer['date'])) {
+								echo " | For ".date('d-m-Y', strtotime($timer['date']));
+							}
+						
+						?>
+						
+						</p>
+					</div>
+					
+					<p class="tasks-each-timestamp">Created the <?php echo date('d-m-Y', strtotime($timer['timestamp'])) ?></p>
+				</div>
+				
+				<div class="tasks-each-content-timer">
+						
+					<p class="tasks-each-description"><?php echo $timer['description']?></p>
+					<a class="tasks-each-link" target='_blank' href='<?php echo $timer['link']?>'>Link</a>
+				
+					<?php
+					
+					echo "<p class='timer-each-remain'>";
+						
+						if ($timer['rutine'] != 0) {
+							
+							if ($timer['rutine'] == 0) {
+								
+								$date_next = new DateTime($timer['timestamp']);
+								$date_next->modify('+1 week');
+								
+								echo "Next Timestop the ".$date_next->format("d")." of ";
+								echo $date_next->format("F")." in ";
+								echo $date_next->format("Y");
+								echo "</p>";
+				
+							}
+							
+							if ($timer['rutine'] == 1) {
+								
+								$date_next = new DateTime($timer['timestamp']);
+								$date_next->modify('+1 month');
+								
+								echo "Next Timestop the ".$date_next->format("d")." of ";
+								echo $date_next->format("F")." in ";
+								echo $date_next->format("Y");
+								echo "</p>";
+				
+							}
+							
+							if ($timer['rutine'] == 2) {
+								
+								$date_next = new DateTime($timer['timestamp']);
+								$date_next->modify('+2 month');
+								
+								echo "Next Timestop the ".$date_next->format("d")." of ";
+								echo $date_next->format("F")." in ";
+								echo $date_next->format("Y");
+								echo "</p>";
+				
+							}
+							
+							if ($timer['rutine'] == 3) {
+								
+								$date_next = new DateTime($timer['timestamp']);
+								$date_next->modify('+4 month');
+								
+								echo "Next Timestop the ".$date_next->format("d")." of ";
+								echo $date_next->format("F")." in ";
+								echo $date_next->format("Y");
+								echo "</p>";
+				
+							}
+							
+							if ($timer['rutine'] == 4) {
+								
+								$date_next = new DateTime($timer['timestamp']);
+								$date_next->modify('+8 month');
+								
+								echo "Next Timestop the ".$date_next->format("d")." of ";
+								echo $date_next->format("F")." in ";
+								echo $date_next->format("Y");
+								echo "</p>";
+				
+							}
+							
+							if ($timer['rutine'] == 5) {
+								
+								$date_next = new DateTime($timer['timestamp']);
+								$date_next->modify('+12 month');
+								
+								echo "Next Timestop the ".$date_next->format("d")." of ";
+								echo $date_next->format("F")." in ";
+								echo $date_next->format("Y");
+								echo "</p>";
+				
+							}
+							
+						} else if (!is_null($timer['date'])) {
+
+							$date_expire = new DateTime($timer['date']);
+							$date_now = new DateTime($timer['timestamp']);
+							$dateCheck = 0;
+							
+							if ($date_expire->diff($date_now)->format("%d") < "01") {
+								echo $date_expire->diff($date_now)->format("%d")." days, ";
+								$dateCheck++;
+							}
+							
+							if ($date_expire->diff($date_now)->format("%m") != "00") {
+								echo $date_expire->diff($date_now)->format("%m")." months";
+								$dateCheck++;
+							}
+							
+							if ($date_expire->diff($date_now)->format("%Y") != "00") {
+								echo $date_expire->diff($date_now)->format("%Y")." years";
+								$dateCheck++;
+							}
+							
+							if ($dateCheck == 0) {
+								echo "Time Exceeded!</p>";
+							} else {
+								echo " Remaining</p>";
+							}
+							
+						}
+					?>
+					
+					<div class="tasks-delete">
+						<form action="deletetimer.php" method="post">
+							<input class="tasks-delete-value" type="radio" name="timerid" checked value=<?php echo $timer['id']?>>
+							<input type="submit" name="submit" value="">
+						</form>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<?php endforeach; ?>
+			
+		</div>
+		
+		
+	</div>
+	
+	<div class="itemBox weather" id="weather">
+		<div class="section">
+			<p>Weather</p>
+		</div>
+	</div>
+	
 	<div class="itemBox tasks" id="tasks">
 		<div class="section">
 			<p>Tasks</p>
 		</div>
 	
-		<div class="tasks-add">
+		<div class="tasks-add tasks-background">
 		
 			<form action="addtask.php" method="post">
 				<div class="tasks-add-banner">
@@ -688,7 +857,7 @@
 									}
 								
 									if ($subtask['link'] == !0) {
-										echo "<a class='subtasks-each-link' href='".$subtask['link']."'>Link</a>";
+										echo "<a class='subtasks-each-link' target='_blank' href='".$subtask['link']."'>Link</a>";
 									}
 
 									//echo "<img class='subtasks-each-image' src='img/tasks/".$subtask['image']."'/>";
@@ -801,6 +970,20 @@ $(document).ready(function(){
 		$('.itemBox').filter('.' + localvalue).show('1000');
 		$('#'+localvalue+'-selector').addClass('active').siblings().removeClass('active');
 		
+	} else if (localStorage.getItem("nav-page") === "timer") {
+		
+		var localvalue = localStorage.getItem("nav-page");
+		$('.itemBox').not('.' + localvalue).hide('1000');
+		$('.itemBox').filter('.' + localvalue).show('1000');
+		$('#'+localvalue+'-selector').addClass('active').siblings().removeClass('active');
+		
+	} else if (localStorage.getItem("nav-page") === "weather") {
+		
+		var localvalue = localStorage.getItem("nav-page");
+		$('.itemBox').not('.' + localvalue).hide('1000');
+		$('.itemBox').filter('.' + localvalue).show('1000');
+		$('#'+localvalue+'-selector').addClass('active').siblings().removeClass('active');
+		
 	} else if (localStorage.getItem("nav-page") === "tasks") {
 		
 		var localvalue = localStorage.getItem("nav-page");
@@ -816,7 +999,7 @@ $(document).ready(function(){
 		$('#'+localvalue+'-selector').addClass('active').siblings().removeClass('active');
 		
 	} else {
-		console.log("There's been an error");
+		
 	}
 	
 	$('.selector').click(function(){
@@ -839,6 +1022,36 @@ $(document).ready(function(){
 	})
 		
 })
+
+function sidebarauto(sidebarmedia) {
+
+	var sidebar = document.getElementById("sidebar");
+	var contentwrapper = document.getElementById("content-wrapper");
+	
+	if (sidebarmedia.matches) {
+		sidebar.className += " sidebar-close";
+		contentwrapper.className += " content-open";
+	} else {
+
+	}
+}
+
+var sidebarmedia = window.matchMedia("(max-width: 900px)")
+sidebarauto(sidebarmedia)
+sidebarmedia.addListener(sidebarauto)
+
+// Timer Options
+
+$("#timertype").change(function(){
+    if ($(this).val() == 1){
+      $("#timerRutinary").show();
+	  $("#timerOcasional").hide();
+    } else {
+      $("#timerRutinary").hide();
+	  $("#timerOcasional").show();
+    }
+
+});
 
 </script>
 

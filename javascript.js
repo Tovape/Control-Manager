@@ -10,18 +10,17 @@ function sidebaraction() {
 		contentwrapper.className += " content-open";
 		
 		localStorage.setItem('sidebar-page', 'closed');
-		
 	} else {
 		sidebar.className = "sidebar sidebar-open";
 		contentwrapper.className = "content-wrapper content-close";
 		
 		localStorage.setItem('sidebar-page', 'open');
-		
 	}
-
 }
 
-// Autoresize
+// Autoresize - In Index.php 
+
+/* Button Block - Disabled
 
 function sidebarauto(sidebarmedia) {
 	
@@ -31,16 +30,18 @@ function sidebarauto(sidebarmedia) {
 	
 	if (sidebarmedia.matches) {
 		localStorage.setItem('sidebar-page', 'closed');
-		sidebarbutton.disabled = true;
+		//sidebarbutton.disabled = true;
 	} else {
 		localStorage.setItem('sidebar-page', 'open');
 	}
 }
 
+
 var sidebarmedia = window.matchMedia("(max-width: 900px)")
 sidebarauto(sidebarmedia)
 sidebarmedia.addListener(sidebarauto)
 
+*/
 
 // Getting Dates
 
@@ -119,5 +120,3 @@ function browserScreen(){
 	screenheight.innerText = screen.height;
 	screencolorDepth.innerText = screen.colorDepth;
 }
-
-

@@ -183,6 +183,8 @@ Sidebar Configuration
     padding: 0;
 }
 
+/* Content Animation */
+
 .content-close {
 	left: 260px;
 	width: calc(100% - 260px);
@@ -236,6 +238,7 @@ Navigation Pages Configuration
 
 .nav-link-each-border{
 	display: flex;
+	position: relative;
 	align-items: center;
 	padding: 20px;
 	border-radius: 10px;
@@ -254,6 +257,36 @@ Navigation Pages Configuration
 	font-family: var(--poppins);
 	padding-left: 14px;
 	color: var(--white);
+}
+
+/* Text Hover Effect */
+
+.nav-link-hover {
+	font-family: var(--poppins); 
+	font-size: 16px;
+	color: var(--white);
+	background-color: var(--yellow2);
+	border-radius: 4px;
+	padding: 4px 10px;
+	position: absolute;
+	display: block;
+	opacity: 0;
+	transition: all 0.2s ease-in-out;
+	z-index: 99;
+}
+
+.sidebar-close .nav-link-hover {
+	transform: translateX(90px) translateY(0%) !important;
+}
+
+.sidebar-open .nav-link-hover {
+	transform: translateX(260px) translateY(0%);
+}
+
+.nav-link .nav-link-each-border:hover .nav-link-hover{
+	transition: all 0.2s ease-in-out;
+	opacity: 1;
+	transform: translateX(260px) translateY(10%);
 }
 
 /*
@@ -434,6 +467,10 @@ Status Configuration
 	font-family: var(--poppins);
 }
 
+.system-table tr:nth-child(even) { 
+	background-color: white;
+}
+
 .system-table tr:nth-child(odd) { 
 	background-color: var(--yellow3);
 }
@@ -470,56 +507,54 @@ Progress Bars Configuration
     margin: 20px
 }
 
-.progress::after {content: "%";}
-
-.progress .title {position: relative;z-index: 100;}
-
-.progress .overlay {
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-	background: linear-gradient(308deg, rgba(255,255,255,0) 30%, rgba(237,237,237,1) 100%);
+@keyframes progress {
+	0% { --percentage: 0; }
+	100% { --percentage: var(--value); }
 }
 
-.progress .left, .progress .right {
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 10px solid var(--yellow1);
-	border-radius: 100px 0px 0px 100px;
-    border-right: 0;
-    transform-origin: right;
+@property --percentage {
+	syntax: '<number>';
+	inherits: true;
+	initial-value: 0;
 }
 
-/* Progress 1 */
+[role="progressbar"] {
+	--percentage: var(--value);
+	--primary: var(--yellow1);
+	--secondary: var(--snowy);
+	--size: 100%;
+	animation: progress 2s 0.5s forwards;
+	width: var(--size);
+	aspect-ratio: 1;
+	border-radius: 50%;
+	position: relative;
+	overflow: hidden;
+	display: grid;
+	place-items: center;
+}
 
-.progress-animation-1 .left {animation: load1-1 1s linear forwards;}
+[role="progressbar"]::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: conic-gradient(var(--primary) calc(var(--percentage) * 1%), var(--secondary) 0);
+	mask: radial-gradient(white 55%, transparent 0);
+	mask-mode: alpha;
+	box-shadow: 0 0px 30px rgba(0, 0, 0, 0.07);
+	-webkit-mask: radial-gradient(#0000 55%, #000 0);
+	-webkit-mask-mode: alpha;
+}
 
-.progress-animation-1:nth-of-type(2) .right, .progress-animation-1:nth-of-type(3) .right {animation: load1-2 .5s linear forwards 1s;}
-
-.progress-animation-1:last-of-type .right, .progress-animation-1:first-of-type .right {animation: load1-3 .8s linear forwards 1s;}
-
-/* Progress 2 */
-
-.progress-animation-2 .left {animation: load2-1 1s linear forwards;}
-
-.progress-animation-2:nth-of-type(2) .right, .progress-animation-2:nth-of-type(3) .right {animation: load2-2 .5s linear forwards 1s;}
-
-.progress-animation-2:last-of-type .right, .progress-animation-2:first-of-type .right {animation: load2-3 .8s linear forwards 1s;}
-
-/* Progress 3 */
-
-.progress-animation-3 .left {animation: load3-1 1s linear forwards;}
-
-.progress-animation-3:nth-of-type(2) .right, .progress-animation-3:nth-of-type(3) .right {animation: load3-2 .5s linear forwards 1s;}
-
-.progress-animation-3:last-of-type .right, .progress-animation-3:first-of-type .right {animation: load3-3 .8s linear forwards 1s;}
-
+[role="progressbar"]::after {
+	counter-reset: percentage var(--value);
+	content: counter(percentage) '%';
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 30px;
+	color: var(--black);
+}
 
 /*
 ----------------------------------
@@ -573,6 +608,24 @@ Tasks Configuration
 	flex-wrap: wrap;
 	flex-direction: row;
 	align-items: center;	
+}
+
+.tasks-each-link {
+	font-family: var(--poppins);	
+	background-color: var(--yellow3);
+	border-radius: 6px;
+	padding: 4px 10px;
+	text-align: center;
+	margin: 10px auto;
+	width: 10rem;
+	box-shadow: 0px 3px 0px 0px var(--light-shadow);
+	transition: all 0.2s ease-in-out;
+}
+
+.tasks-each-link:hover {
+	transform: translateY(3px);
+	box-shadow: 0px 0px 0px 0px var(--light-shadow);
+	transition: all 0.2s ease-in-out;
 }
 
 .tasks-each-content {
@@ -675,7 +728,20 @@ Tasks Configuration
 }
 
 .subtasks-each-link {
-	text-decoration: underline;
+	font-family: var(--poppins);	
+	background-color: var(--yellow3);
+	border-radius: 6px;
+	padding: 4px 10px;
+	text-align: center;
+	margin: 10px 0;
+	box-shadow: 0px 3px 0px 0px var(--light-shadow);
+	transition: all 0.2s ease-in-out;
+}
+
+.subtasks-each-link:hover {
+	transform: translateY(3px);
+	box-shadow: 0px 0px 0px 0px var(--light-shadow);
+	transition: all 0.2s ease-in-out;
 }
 
 .subtasks-each-image {
@@ -693,6 +759,13 @@ Tasks Configuration
 	border-radius: 10px;
 	margin-bottom: 2rem;
 	padding: 10px;
+}
+
+.tasks-background {
+	background:url("./img/config/addsubtask.png");
+	background-repeat: no-repeat;
+	background-size: auto 80%;
+	background-position: right bottom;
 }
 
 .tasks-add-banner {
@@ -741,6 +814,7 @@ Tasks Configuration
 	border-radius: 10px;
 	border: 1px solid var(--yellow3);
 	transition: all 0.2s ease-in-out;
+	background: transparent;
 }
 
 .tasks-add textarea:focus{
@@ -749,7 +823,7 @@ Tasks Configuration
 	border: 1px solid var(--yellow1);
 }
 
-#taskstatus {
+#taskstatus, #timertype, #timerRutinary, #timerOcasional {
 	padding: 4px;
 	font-family: var(--poppins);	
 	border: 0;
@@ -758,7 +832,7 @@ Tasks Configuration
 	transition: all 0.2s ease-in-out;
 }
 
-#taskstatus:focus{
+#taskstatus, #timertype, #timerRutinary, #timerOcasional:focus{
 	border: 1px solid var(--yellow1);
 	transition: all 0.2s ease-in-out;
     outline: none;
@@ -1058,6 +1132,46 @@ Tasks Configuration
 
 /*
 ----------------------------------
+Timer Configuration
+----------------------------------
+*/
+
+.timer-background {
+	background:url("./img/config/clock.png");
+	background-repeat: no-repeat;
+	background-size: auto 80%;
+	background-position: right bottom;
+}
+
+#timerOcasional {
+}
+
+#timerRutinary {
+	display: none;
+}
+
+.tasks-each-content-timer{
+	padding: 10px;
+	overflow: auto;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+.tasks-each-content-timer p{
+	margin: 0;
+}
+
+.timer-each-remain {
+	text-align: center;
+    font-family: var(--poppins);
+	font-size: 1.4rem;
+}
+
+
+
+/*
+----------------------------------
 Media Configuration
 ----------------------------------
 */
@@ -1085,6 +1199,17 @@ Media Configuration
 	line-height: 100px;
 }
 
+.status-progress-flex-each-title {
+	color: var(--black);
+	font-size: 1.2rem;
+	margin:0;
+}
+
+[role="progressbar"]::after {
+	font-size: 22px;
+}
+
+
 /* Tasks */
 
 }
@@ -1099,11 +1224,19 @@ Media Configuration
 
 /* Tasks */
 
+/* Timer */
+
 }
 
 @media only screen and (max-width: 600px) {
 
 /* General */
+
+/* Status */
+
+.system-table {
+	width: 100%;
+}
 
 /* Tasks */
 
@@ -1128,6 +1261,9 @@ Media Configuration
     font-size: 0.8rem;
 }
 
+.subtasks-each-content-timer p,a {
+    font-size: 0.8rem;
+}
 
 }
 
