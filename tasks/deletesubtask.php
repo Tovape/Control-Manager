@@ -24,7 +24,7 @@ if (isset($_POST["submit"])) {
 		echo "Error: " . $sql . "<br>" . $conn->error;
 	}
 
-	header("Location: index.php");
+	header("Location: ../index.php");
 
 	$conn->close();
 	

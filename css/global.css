@@ -1,0 +1,401 @@
+/*
+----------------------------------
+Toni Valverde Frontend & Backend
+github.com/Tovape
+HTML / CSS / JS / PHP / MySQL Control Panel
+Ver 1.0
+/*
+
+/*
+----------------------------------
+Color Configuration
+----------------------------------
+*/
+
+:root {
+	
+	/* Color Palette */
+
+	--primary: #12101b;
+	--secundary: #12101b;
+	--border: #0E0A21;
+	--hover: #1d1b31;
+	--white: #eeeeee;
+	--black: #111111;
+	--snowy: #DFDFDF;
+	--grey: #B7B7B7;
+	--graphite: #7C7C7C;
+	--yellow1: #f2cd66;
+	--yellow2: #F2DC9D;
+	--yellow3: #FBF4E0;
+	
+	/* Shadow Palette */
+	
+	--light-shadow: rgba(0,0,0,0.2);
+	--normal-shadow: rgba(0,0,0,0.4);
+	--high-shadow: rgba(0,0,0,0.6);
+	
+	/* Font Palette */
+	
+	--montserrat: 'Montserrat', sans-serif;
+	--poppins: 'Poppins', sans-serif;
+	--light-font: 100;
+	--normal-font: 300;
+	--huge-font: 900;
+}
+
+::-moz-selection {
+	background: #5480A7;
+	color: var(--white);
+}
+
+::selection {
+	background: #5480A7;
+	color: var(--white);
+}
+
+/*
+----------------------------------
+Scrollbar Configuration
+----------------------------------
+*/
+
+::-webkit-scrollbar {
+	width: 0.8em;
+}
+ 
+::-webkit-scrollbar-thumb {
+	background-color: var(--yellow1);
+	border-radius: 20px;
+}
+
+/*
+----------------------------------
+Element Configuration
+----------------------------------
+*/
+
+*{
+	box-sizing: border-box;
+}
+
+html {
+	margin: 0;
+	padding: 0;
+	zoom: 100%; 
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	padding: 0;	
+	transition: all 0.2s ease-in-out;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+	margin:0;
+}
+
+/*
+----------------------------------
+Sidebar Configuration
+----------------------------------
+*/
+
+.sidebar {
+	top: 0;
+	left: 0;
+	position: fixed;
+	background: var(--primary);
+	height: 100%;
+	width: 260px;
+}
+
+.sidebar .sidebar-logo {
+	height: 60px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 0 10px;
+}
+
+.sidebar .sidebar-logo i {
+	font-size: 26px;
+	color: var(--white);
+	width: 36px;
+}
+
+.sidebar .sidebar-logo button {
+	cursor: pointer;
+	border: none;
+	outline: none;
+	padding: 0;
+	margin:0;
+	background: transparent;
+}
+
+.sidebar .sidebar-logo .sidebar-logo-text {
+	font-size: 22px;
+	font-weight: var(--normal-font);
+	font-family: var(--poppins); 
+	color: var(--white);
+}
+
+/* Sidebar Animation */
+
+.sidebar-open {
+	width: 260px;
+	transition: all 0.2s ease-in-out;
+}
+
+.sidebar-close {
+	width: 60px;
+	transition: all 0.2s ease-in-out;
+}
+
+.sidebar-close .nav-link .nav-link-each .nav-link-text {
+	display: none;
+}
+
+.sidebar-close .sidebar-logo .sidebar-logo-text {
+	display: none;
+}
+
+.sidebar-close .sidebar-setting-text {
+	display: none;
+}
+
+.sidebar-close .nav-link .nav-link-each {
+    margin: 2px 0;
+	width: 100%;
+}
+
+.sidebar-close .sidebar-setting {
+	margin: 0 !important;
+	width: 100% !important;
+}
+
+.sidebar-close .sidebar-logo {
+	justify-content: center;
+    padding: 0;
+}
+
+/* Content Animation */
+
+.content-close {
+	left: 260px;
+	width: calc(100% - 260px);
+	transition: all 0.2s ease-in-out;
+}
+
+.content-open {
+    left: 60px;
+    width: calc(100% - 60px);
+	transition: all 0.2s ease-in-out;
+}
+
+.content-open .content {
+	width: calc(100% - 35px);
+	margin: 0 15px 0 20px;
+}
+
+/*
+----------------------------------
+Navigation Pages Configuration
+----------------------------------
+*/
+
+.active {
+	transition: all 0.2s ease-in-out;
+	background: linear-gradient(270deg, rgba(29,27,49,1) 20%, rgba(255,255,255,0) 100%);
+}
+
+.nav-link {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin:0;
+	padding:0;
+	padding-top: 10px;
+	border-top: 3px solid var(--white);
+}
+
+.nav-link .nav-link-each {
+	list-style-type: none;
+	height: auto;
+	width: calc(100% - 16px);
+	margin: 8px;
+}
+
+.nav-link .nav-link-each i {
+	font-size: 16px;
+	color: var(--white);
+	width: 36px;
+}
+
+.nav-link-each-border{
+	display: flex;
+	position: relative;
+	align-items: center;
+	padding: 20px;
+	border-radius: 10px;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;	
+}
+
+.nav-link .nav-link-each-border:hover {
+	transition: all 0.2s ease-in-out;
+	background-color: var(--hover);
+}
+
+.nav-link .nav-link-each .nav-link-text {
+	font-size: 18px;
+	font-weight: var(--normal-font);
+	font-family: var(--poppins);
+	padding-left: 14px;
+	color: var(--white);
+}
+
+/* Text Hover Effect */
+
+.nav-link-hover {
+	font-family: var(--poppins); 
+	font-size: 16px;
+	color: var(--white);
+	background-color: var(--yellow2);
+	border-radius: 4px;
+	padding: 4px 10px;
+	position: absolute;
+	display: block;
+	opacity: 0;
+	transition: all 0.2s ease-in-out;
+	z-index: 99;
+}
+
+/* Sidebar Animation */
+
+.sidebar-close .nav-link-hover {
+	transform: translateX(90px) translateY(0%) !important;
+}
+
+.sidebar-open .nav-link-hover {
+	transform: translateX(260px) translateY(0%);
+}
+
+.nav-link .nav-link-each-border:hover .nav-link-hover{
+	transition: all 0.2s ease-in-out;
+	opacity: 1;
+	transform: translateX(260px) translateY(10%);
+}
+
+/*
+----------------------------------
+Setting Page Configuration
+----------------------------------
+*/
+
+.sidebar .sidebar-setting {
+	position: absolute;
+	bottom: 8px;
+	height: auto;
+	margin: 8px;
+	padding: 0;
+	width: calc(100% - 16px);
+}
+
+.sidebar .sidebar-setting i {
+	font-size: 16px;
+	color: var(--white);
+	width: 36px;
+}
+
+.sidebar-setting .sidebar-border{
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	padding: 20px;
+	border-radius: 10px;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;	
+}
+
+.sidebar-setting .sidebar-border:hover {
+	transition: all 0.2s ease-in-out;
+	background-color: var(--hover);
+}
+
+.sidebar-setting-text {
+	font-size: 18px;
+	font-weight: var(--normal-font);
+	font-family: var(--poppins);
+	padding-left: 14px;
+	color: var(--white);
+}
+
+/*
+----------------------------------
+Content Configuration
+----------------------------------
+*/
+
+.content-wrapper {
+	top: 0;
+	position: relative;
+	height: 100%;
+	overflow: scroll;
+	padding: 0;
+}
+
+.content{
+	width: calc(100% - 80px);
+	margin: 0 auto;
+}
+
+.section {
+	width: 100%;
+	height: 100%;
+	padding: 1rem 0rem;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content:space-between; 
+}
+
+.section-time {
+	position: absolute;
+	top: 5px;
+	right:0;
+}
+
+.section-time span {
+	font-weight: var(--huge-font);
+	font-family: var(--montserrat);
+	font-size: 24px;
+	margin: 0;
+	padding: 0 0.3rem;
+}
+
+#getTime {
+	padding-right: 20px;
+	margin-right: 15px;
+	border-right: 1px solid var(--primary);
+}
+
+.section p {
+	font-weight: var(--huge-font);
+	font-family: var(--montserrat);
+	font-size: 48px;
+	margin: 0;
+	background: linear-gradient(to right, var(--yellow1) 0%, var(--yellow2) 40%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.subsection {
+	font-family: var(--montserrat);
+}
+

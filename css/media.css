@@ -1,0 +1,102 @@
+/*
+----------------------------------
+Media Configuration
+----------------------------------
+*/
+
+@media only screen and (max-width: 1375px) {
+
+/* General */
+
+/* Status */
+
+.system-table{
+	width: auto;
+}
+
+.status-progress-flex-each {
+	width: 10rem;
+	padding: 10px 0;
+    margin: 0.4rem 1rem;
+}
+
+.progress{
+	width: 100px;
+	height: 100px;
+	font-size: 1rem;
+	line-height: 100px;
+}
+
+.status-progress-flex-each-title {
+	color: var(--black);
+	font-size: 1.2rem;
+	margin:0;
+}
+
+[role="progressbar"]::after {
+	font-size: 22px;
+}
+
+
+/* Tasks */
+
+}
+
+@media only screen and (max-width: 900px) {
+
+/* General */
+
+.section-time {
+	display: none;
+}
+
+/* Tasks */
+
+/* Timer */
+
+}
+
+@media only screen and (max-width: 600px) {
+
+/* General */
+
+/* Status */
+
+.system-table {
+	width: 100%;
+}
+
+/* Tasks */
+
+.tasks-each-banner {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tasks-each-image {
+    max-width: 4rem;
+    max-height: 4rem;
+}
+
+.subtasks-each {
+    padding: 2px 4px 3px;
+    margin: 4px;
+    height: auto;
+}
+
+.subtasks-each-content p,a {
+    font-size: 0.8rem;
+}
+
+.subtasks-each-content-timer p,a {
+    font-size: 0.8rem;
+}
+
+}
+
+/*
+*{
+	outline: 1px solid red;
+}
+*/

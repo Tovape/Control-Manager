@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="es-ES">
 	<link rel="icon" href="svg/logo.svg" type="image/gif" sizes="16x16">
-	<link rel="stylesheet" type="text/css" href="global.css">
-	<link rel="stylesheet" type="text/css" href="elements.css">
+	<link rel="stylesheet" type="text/css" href="./css/global.css">
+	<link rel="stylesheet" type="text/css" href="./css/elements.css">
+	<link rel="stylesheet" type="text/css" href="./css/media.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap" rel="stylesheet">
@@ -39,19 +40,17 @@
 	include 'functions.php';
 	include './tasks/tasks.php';
 	include './timer/timer.php';
+	include './weather/weather.php';
 	
 	// Check Files
 	
-	$percentagecount1 = 0;
+	$percentagecount1 = 30;
 
 	$javascriptjs = './javascript.js';
-	$stylecss = './style.css';
+	$stylecss = './css/global.css';
 	$functionsphp = './functions.php';
-	$tasksphp = './tasks.php';
-	$addtaskphp = './addtask.php';
-	$deletetaskphp = './deletetask.php';
-	$addsubtaskphp = './addsubtask.php';
-	$deletesubtaskphp = './deletesubtask.php';
+	$tasksphp = './tasks/tasks.php';
+	$timerphp = './timer/timer.php';
 	$batcheck = './bat/cpuId.bat';
 	$imgcheck = './img/config/add.png';
 
@@ -71,19 +70,7 @@
 		$percentagecount1 += 10;
 	}
 	
-	if (file_exists($addtaskphp)) {
-		$percentagecount1 += 10;
-	}
-	
-	if (file_exists($deletetaskphp)) {
-		$percentagecount1 += 10;
-	}
-	
-	if (file_exists($addsubtaskphp)) {
-		$percentagecount1 += 10;
-	}
-	
-	if (file_exists($deletesubtaskphp)) {
+	if (file_exists($timerphp)) {
 		$percentagecount1 += 10;
 	}
 	
@@ -444,9 +431,6 @@
 		<div class="section">
 			<p>Projects</p>
 		</div>
-		
-		
-		
 	</div>
 	
 	<div class="itemBox timer" id="timer">
@@ -455,7 +439,7 @@
 		</div>
 		
 		<div class="tasks-add timer-background">
-			<form action="addtimer.php" method="post">
+			<form action="./timer/addtimer.php" method="post">
 				<div class="tasks-add-banner">
 					<img src='./img/config/add.png'/>
 					<input type="text" id="timertitle" name="timertitle" placeholder="Title" required>
@@ -626,7 +610,7 @@
 					?>
 					
 					<div class="tasks-delete">
-						<form action="deletetimer.php" method="post">
+						<form action="./timer/deletetimer.php" method="post">
 							<input class="tasks-delete-value" type="radio" name="timerid" checked value=<?php echo $timer['id']?>>
 							<input type="submit" name="submit" value="">
 						</form>
@@ -647,6 +631,17 @@
 		<div class="section">
 			<p>Weather</p>
 		</div>
+		
+		<div class="weather-flex">
+		
+			<?php
+			
+			weather();
+			
+			?>
+		
+		</div>
+
 	</div>
 	
 	<div class="itemBox tasks" id="tasks">
@@ -656,7 +651,7 @@
 	
 		<div class="tasks-add tasks-background">
 		
-			<form action="addtask.php" method="post">
+			<form action="./tasks/addtask.php" method="post">
 				<div class="tasks-add-banner">
 					<img src='./img/config/add.png'/>
 					<input type="text" id="tasktitle" name="tasktitle" placeholder="Title" required>
@@ -863,14 +858,14 @@
 									//echo "<img class='subtasks-each-image' src='img/tasks/".$subtask['image']."'/>";
 									
 									echo "<div class='subtasks-edit'>";
-										echo "<form action='editsubtask.php' method='post'>";
+										echo "<form action='./tasks/editsubtask.php' method='post'>";
 										echo "<input class='subtasks-edit-value' type='radio' name='subtaskid' checked value=".$subtask['id'].">";
 										echo "<input type='submit' name='submit' value=''>";
 										echo "</form>";
 									echo "</div>";
 									
 									echo "<div class='subtasks-delete'>";
-										echo "<form action='deletesubtask.php' method='post'>";
+										echo "<form action='./tasks/deletesubtask.php' method='post'>";
 										echo "<input class='subtasks-delete-value' type='radio' name='subtaskid' checked value=".$subtask['id'].">";
 										echo "<input type='submit' name='submit' value=''>";
 										echo "</form>";
@@ -886,7 +881,7 @@
 						<?php endforeach; ?>
 						
 						<div class='subtasks-add'>
-							<form action="addsubtask.php" method="post">
+							<form action="./tasks/addsubtask.php" method="post">
 								<input type="text" id="subtasktitle" name="subtasktitle" placeholder="Title" required>
 								<input type="text" id="subtasksubtitle" name="subtasksubtitle" placeholder="Subtitle">
 								<input type="text" id="subtasklink" name="subtasklink" placeholder="Link">
@@ -904,14 +899,14 @@
 						</div>
 						
 						<div class="tasks-edit">
-							<form action="editask.php" method="post">
+							<form action="./tasks/editask.php" method="post">
 								<input class="tasks-edit-value" type="radio" name="taskid" checked value=<?php echo $task['id']?>>
 								<input type="submit" name="submit" value="">
 							</form>
 						</div>
 						
 						<div class="tasks-delete">
-							<form action="deletetask.php" method="post">
+							<form action="./tasks/deletetask.php" method="post">
 								<input class="tasks-delete-value" type="radio" name="taskid" checked value=<?php echo $task['id']?>>
 								<input type="submit" name="submit" value="">
 							</form>
@@ -932,7 +927,6 @@
 		<div class="section">
 			<p>Settings</p>
 		</div>
-		
 	</div>
 
 	</div>

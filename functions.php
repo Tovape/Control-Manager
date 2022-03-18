@@ -255,11 +255,7 @@ function sysMediaFunction() {
 		echo "<td>Name</td>";
 		echo "<td>".$sysMedianameoutput[$i]."</td>";
 		echo "</tr><tr>";
-		echo "<td>Size</td>";
-		
-		
-
-		
+		echo "<td>Size</td>";		
 		echo "<td>".number_format((float)($sysMediasizeoutput[$i]/1073741824), 2, '.', '')." GB</td>";
 		echo "</tr><tr>";
 		echo "<td>Manufacturer</td>";
@@ -273,7 +269,5 @@ function sysMediaFunction() {
 		echo "</tr></table></div>";
 	}
 }
-
-
 
 ?>
