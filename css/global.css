@@ -100,6 +100,31 @@ a {
 
 /*
 ----------------------------------
+Loading Configuration
+----------------------------------
+*/
+
+
+#loading {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: 100%;
+	height: 100%;
+	background-color: var(--graphite);
+	background-image: url("../img/config/loading.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.hider {
+	display: none;
+}
+
+/*
+----------------------------------
 Sidebar Configuration
 ----------------------------------
 */

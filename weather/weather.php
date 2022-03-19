@@ -16,7 +16,7 @@ function weather() {
 		$dayStatus = "weather-day";
 		$dayText = "Day";
 	}
-		
+
 	// Get Weather
 	
 	$apiKey = "0c6c7437dc3965467da9bf26b092f8d2";
