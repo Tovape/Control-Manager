@@ -4,6 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/global.css">
 	<link rel="stylesheet" type="text/css" href="./css/elements.css">
 	<link rel="stylesheet" type="text/css" href="./css/media.css">
+	<link rel="stylesheet" type="text/css" href="./css/darktheme.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap" rel="stylesheet">
@@ -31,9 +32,32 @@
 	
 </head>
 
-<body onload='browserScreen()'>
-
 <?php
+
+	// Connection
+
+	$server = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "control";
+	
+	$conn = mysqli_connect($server, $username, $password, $dbname);
+
+	$sql = "SELECT * FROM config;";
+	$result = mysqli_query($conn, $sql);
+	$resultcheck = mysqli_num_rows($result);
+
+	if ($resultcheck > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			if ($row['theme'] == 0) {
+				echo "<body onload='browserScreen()' class='light-theme'>";
+				$darkmode = 0;
+			} else if ($row['theme'] == 1) {
+				echo "<body onload='browserScreen()' class='dark-theme'>";
+				$darkmode = 1;
+			}
+		}
+	}
 
 	// Include Files
 
@@ -187,8 +211,7 @@
 	</div>
 </div>
 
-<div class="content-wrapper content-close" id="content-wrapper">
-
+<div id="content-wrapper" class="content-wrapper content-close">
 	<div class="content">
 	
 	<div class="section-time">
@@ -927,6 +950,24 @@
 		<div class="section">
 			<p>Settings</p>
 		</div>
+		
+		<div class="setting-flex">
+		
+			<div class="setting-each">
+				<h2>Dark Mode</h2>
+				<form action="./setting/theme.php" method="post" class="setting-form">
+					<label class="pure-material-switch">
+						<input type="checkbox" name="themeoption" <?php if($darkmode == 1) {echo "checked";} ?>>
+						<span></span>
+					</label>
+					<label class="pure-material-apply">
+						<input type="submit">
+						<span>Apply</span>
+					</label>
+				</form>
+			</div>
+		
+		</div>
 	</div>
 
 	</div>
@@ -1069,6 +1110,18 @@ $("#timertype").change(function(){
     }
 
 });
+
+// Setting From Delay
+	
+/*	
+$('.setting-form').submit(function (e) {
+	var form = this;
+	e.preventDefault();
+	setTimeout(function () {
+		form.submit();
+	}, 1000);
+});
+*/
 
 </script>
 

@@ -1,0 +1,35 @@
+body.dark-theme{
+	background-color: var(--black2) !important;
+}
+
+body.dark-theme .content-wrapper {
+	background-color: var(--black2) !important;
+}
+
+body.dark-theme .section-time {
+	color: var(--white);
+}
+
+body.dark-theme .subsection {
+	color: var(--white);
+}
+
+body.dark-theme .status-progress-flex-each  {
+	background: linear-gradient(308deg, rgba(155,155,155,1) 30%, rgba(237,237,237,1) 100%);
+}
+
+body.dark-theme .tasks-each {
+	background: linear-gradient(200deg, rgba(155,155,155,1) 30%, rgba(237,237,237,1) 100%);
+}
+
+body.dark-theme .tasks-add-banner input {
+	background-color: var(--black2);
+}
+
+body.dark-theme .weather-each.weather-day-back {
+	background: linear-gradient(200deg, rgba(155,155,155,1) 30%, rgba(237,237,237,1) 100%);
+}
+
+body.dark-theme .setting-each {
+	background: linear-gradient(200deg, rgba(155,155,155,1) 30%, rgba(237,237,237,1) 100%);
+}
