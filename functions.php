@@ -207,6 +207,31 @@ function sysRamfactortypeFunction() {
 
 }
 
+// Get System Battery Percentage
+
+function sysBatterynumberFunction() {
+	exec('cmd /c .\bat\sysBattery.bat 2>&1', $sysBatteryoutput, $sysBatteryvalue);
+	return $sysBatteryoutput[1];
+}
+
+// Get System Battery Color
+
+function sysBatterycolorFunction() {
+	exec('cmd /c .\bat\sysBattery.bat 2>&1', $sysBatteryoutput, $sysBatteryvalue);
+		
+	if ($sysBatteryoutput[1] <= 20) {
+		return $sysBatteryoutput[1]."%;background-color: #ff2e2e";
+	} else if ($sysBatteryoutput[1] > 20 && $sysBatteryoutput[1] <= 40) {
+		return $sysBatteryoutput[1]."%;background-color: #fb7901";
+	} else if ($sysBatteryoutput[1] > 40 && $sysBatteryoutput[1] <= 60) {
+		return $sysBatteryoutput[1]."%;background-color: #f5ca01";
+	} else if ($sysBatteryoutput[1] > 60 && $sysBatteryoutput[1] <= 80) {
+		return $sysBatteryoutput[1]."%;background-color: #84c300";
+	} else if ($sysBatteryoutput[1] > 80 && $sysBatteryoutput[1] <= 100) {
+		return $sysBatteryoutput[1]."%;background-color: #00bf00";
+	}
+}
+
 // Get System Ram Size in GB
 
 function sysRamSizeFunction() {

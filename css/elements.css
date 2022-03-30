@@ -88,6 +88,55 @@ Status Configuration
 	text-align: left;
 }
 
+/* Status Banner */
+
+.system-banner {
+	margin: 0 auto;
+	width: calc(100% - 0.8rem);
+}
+
+.system-banner-each {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    height: 8rem;
+    margin: 0.4rem;
+	padding: 10px;
+    border-radius: 20px;
+    transition: all 0.2s ease-in-out;
+    background: linear-gradient(308deg, rgba(155,155,155,1) 30%, rgba(237,237,237,1) 100%);
+    box-shadow: 0 0px 30px rgb(0 0 0 / 7%);
+}
+
+.battery-top {
+	display: flex;
+	align-items: center;
+	border-radius: 10px;
+	width: calc(100% - 5px);
+	height: 3rem;
+	background-color:black;
+	padding: 5px;
+}
+
+.battery-bottom {
+	background-color: black;
+	border-radius: 0 10px 10px 0;
+	height: 20px;
+	width: 5px;
+}
+
+.battery-bar {
+	display: flex;
+	align-items:center;
+	justify-content:center;
+	border-radius: 5px;
+	height: 100%;
+	font-family: var(--poppins);
+}
+
 /*
 ----------------------------------
 Progress Bars Configuration

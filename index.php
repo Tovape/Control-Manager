@@ -171,13 +171,6 @@
 				<span class="nav-link-hover">Status</span>
 			</div>
 		</li>
-		<li class="nav-link-each projects" id="projects-selector">
-			<div class="nav-link-each-border selector" data-filter="projects">
-				<i class="fas fa-project-diagram"></i>
-				<span class="nav-link-text">Projects</span>
-				<span class="nav-link-hover">Projects</span>
-			</div>
-		</li>
 		<li class="nav-link-each timer" id="timer-selector">
 			<div class="nav-link-each-border selector" data-filter="timer">
 				<i class="fas fa-clock"></i>
@@ -247,6 +240,23 @@
 				<p class="status-progress-flex-each-title">Tasks</p>
 				<p class="status-progress-flex-each-desc">Remaining</p>
 			</div>
+		</div>
+		
+		<div class="subsection">
+			<h2>System Status</h2>
+		</div>
+		
+		<div class="system-banner">
+			
+			<div class="system-banner-each">
+			
+				<div class="battery-top">
+					<span class="battery-bar" style="width:<?php echo sysBatterycolorFunction();?>"><?php echo sysBatterynumberFunction();?>%</span>
+				</div>
+				<div class="battery-bottom">&nbsp;</div>
+			
+			</div>
+			
 		</div>
 		
 		<div class="subsection">
@@ -447,12 +457,6 @@
 				sysMediaFunction();
 			?>
 
-		</div>
-	</div>
-	
-	<div class="itemBox projects" id="projects">
-		<div class="section">
-			<p>Projects</p>
 		</div>
 	</div>
 	
