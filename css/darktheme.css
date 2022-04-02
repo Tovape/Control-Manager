@@ -2,6 +2,10 @@ body.dark-theme{
 	background-color: var(--black2) !important;
 }
 
+body.dark-theme #getTime {
+	border-right: 1px solid var(--white);
+}
+
 body.dark-theme .content-wrapper {
 	background-color: var(--black2) !important;
 }
@@ -14,12 +18,20 @@ body.dark-theme .subsection {
 	color: var(--white);
 }
 
-body.dark-theme .status-progress-flex-each  {
-	background: linear-gradient(308deg, rgba(155,155,155,1) 30%, rgba(237,237,237,1) 100%);
+body.dark-theme .status-progress-flex-each {
+	background: linear-gradient(250deg, rgba(200,200,200,0.8) 30%, rgba(237,237,237,0.8) 100%);
+}
+
+body.dark-theme .tasks-each-content p {
+	color: var(--white)
+}
+
+body.dark-theme .tasks-each-content-timer p {
+	color: var(--white)
 }
 
 body.dark-theme .tasks-each {
-	background: linear-gradient(200deg, rgba(155,155,155,1) 30%, rgba(237,237,237,1) 100%);
+	background: none;
 }
 
 body.dark-theme .tasks-add-banner input {
@@ -27,9 +39,38 @@ body.dark-theme .tasks-add-banner input {
 }
 
 body.dark-theme .weather-each.weather-day-back {
-	background: linear-gradient(200deg, rgba(155,155,155,1) 30%, rgba(237,237,237,1) 100%);
+	background: linear-gradient(200deg, var(--darkgradient1) 30%, var(--darkgradient2) 100%);
 }
 
 body.dark-theme .setting-each {
-	background: linear-gradient(200deg, rgba(155,155,155,1) 30%, rgba(237,237,237,1) 100%);
+	background: linear-gradient(200deg, var(--darkgradient1) 30%, var(--darkgradient2) 100%);
+}
+
+body.dark-theme .nav-link-hover {
+	color: var(--primary);
+}
+
+body.dark-theme .tasks-background {
+	background: linear-gradient(200deg, var(--darkgradient3) 30%, var(--darkgradient4) 100%);
+}
+
+body.dark-theme #taskdesc {
+    background-color: var(--black2);
+}
+
+body.dark-theme #taskstatus, #timerOcasional, #timertype {
+	background-color: var(--black2);
+	color: var(--white);
+}
+
+body.dark-theme .tasks-sort {
+	color: var(--white);
+}
+
+body.dark-theme .tasks-sort-checked-square {
+	outline: 2px solid var(--white);
+}
+
+body.dark-theme .subtasks-each {
+	background: linear-gradient(200deg, var(--darkgradient3) 30%, var(--darkgradient4) 100%);
 }

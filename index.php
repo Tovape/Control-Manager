@@ -251,9 +251,14 @@
 			<div class="system-banner-each">
 			
 				<div class="battery-top">
-					<span class="battery-bar" style="width:<?php echo sysBatterycolorFunction();?>"><?php echo sysBatterynumberFunction();?>%</span>
+					<p class="battery-number"><?php echo sysBatterynumberFunction();?>%</p>
+					<span class="battery-bar" style="width:<?php echo sysBatterycolorFunction();?>"></span>
 				</div>
 				<div class="battery-bottom">&nbsp;</div>
+			
+			</div>
+			
+			<div class="system-banner-each">
 			
 			</div>
 			

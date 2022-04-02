@@ -107,7 +107,7 @@ Status Configuration
 	padding: 10px;
     border-radius: 20px;
     transition: all 0.2s ease-in-out;
-    background: linear-gradient(308deg, rgba(155,155,155,1) 30%, rgba(237,237,237,1) 100%);
+    background: linear-gradient(308deg, rgba(200,200,200,1) 30%, rgba(237,237,237,1) 100%);
     box-shadow: 0 0px 30px rgb(0 0 0 / 7%);
 }
 
@@ -119,6 +119,7 @@ Status Configuration
 	height: 3rem;
 	background-color:black;
 	padding: 5px;
+	position: relative;
 }
 
 .battery-bottom {
@@ -134,7 +135,19 @@ Status Configuration
 	justify-content:center;
 	border-radius: 5px;
 	height: 100%;
-	font-family: var(--poppins);
+}
+
+.battery-number{
+	color: var(--white);
+	text-align:center;
+	width: 100%;
+	margin: 0;
+	position: absolute;
+	top: auto;
+	left: auto;
+	bottom: auto;
+	right: auto;
+	font-family: var(--poppins);	
 }
 
 /*
@@ -1043,7 +1056,7 @@ Settings Configuration
 
 .pure-material-apply span:hover {
 	color: white;
-	background-color: var(--hover);
+	background-color: var(--yellow4);
     transition: all 0.2s ease-in-out;
 }
 
@@ -1145,7 +1158,7 @@ Settings Configuration
 }
 
 .pure-material-switch > input:active + span::before {
-    background-color: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.6);
+    background-color: rgba(var(--pure-material-primary-rgb, 155, 155, 155), 0.6);
 }
 
 .pure-material-switch > input:checked:active + span::before {
@@ -1167,5 +1180,5 @@ Settings Configuration
 }
 
 .pure-material-switch > input:checked:disabled + span::before {
-    background-color: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.6);
+    background-color: rgba(var(--pure-material-primary-rgb,155, 155, 155), 0.6);
 }
