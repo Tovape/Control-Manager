@@ -91,6 +91,8 @@ Status Configuration
 /* Status Banner */
 
 .system-banner {
+	display: flex;
+	flex-direction: row;
 	margin: 0 auto;
 	width: calc(100% - 0.8rem);
 }
@@ -110,6 +112,8 @@ Status Configuration
     background: linear-gradient(308deg, rgba(200,200,200,1) 30%, rgba(237,237,237,1) 100%);
     box-shadow: 0 0px 30px rgb(0 0 0 / 7%);
 }
+
+/* Status Battery */
 
 .battery-top {
 	display: flex;
@@ -141,6 +145,73 @@ Status Configuration
 	color: var(--white);
 	text-align:center;
 	width: 100%;
+	margin: 0;
+	position: absolute;
+	top: auto;
+	left: auto;
+	bottom: auto;
+	right: auto;
+	font-family: var(--poppins);	
+}
+
+/* Status CPU */
+
+.cpu-top {
+	display: flex;
+	align-items: flex-end;
+	justify-content:flex-end;
+	width: 6rem;
+	height: 6rem;
+	background-color:black;
+	padding: 5px;
+	position: relative;
+	border-radius: 5px;
+}
+
+.cpu-bar {
+	display: flex;
+	align-items:flex-end;
+	justify-content:flex-end;
+	width: 100%;
+}
+
+.cpu-number {
+	color: var(--white);
+	text-align:center;
+	width: calc(100% - 10px);
+	margin: 0;
+	position: absolute;
+	top: auto;
+	left: auto;
+	bottom: auto;
+	right: auto;
+	font-family: var(--poppins);	
+}
+
+/* Status RAM */
+
+.ram-top {
+	display: flex;
+	align-items: center;
+	width: 6rem;
+	height: 6rem;
+	background-color:black;
+	padding: 5px;
+	position: relative;
+	border-radius: 5px;
+}
+
+.ram-bar {
+	display: flex;
+	align-items:center;
+	justify-content:center;
+	height: 100%;
+}
+
+.ram-number {
+	color: var(--white);
+	text-align:center;
+	width: calc(100% - 10px);
 	margin: 0;
 	position: absolute;
 	top: auto;

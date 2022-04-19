@@ -259,7 +259,20 @@
 			</div>
 			
 			<div class="system-banner-each">
+				<div class="cpu-top">
+					<p class="cpu-number">
+					<?php echo sysCpuPercentageFunction();?>%</p>
+					<span class="cpu-bar" style="height:<?php echo sysCpucolorFunction();?>"></span>
+				</div>
+			</div>
 			
+			<div class="system-banner-each">
+				<div class="ram-top">
+					<p class="ram-number">
+					<?php echo sysRamSizeFunction() - sysRamPercentageFunction(); ?>GB</p>
+					<span class="ram-bar" style="width:<?php echo sysRamcolorFunction();?>"></span>
+				</div>
+				
 			</div>
 			
 		</div>
@@ -444,7 +457,7 @@
 						<td>
 							<?php
 								echo sysRamSizeFunction();
-							?>
+							?>GB
 						</td>
 					</tr>
 				</table>

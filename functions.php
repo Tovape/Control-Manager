@@ -130,6 +130,32 @@ function sysCpucaptionFunction() {
 	return $sysCpucaptionoutput[1];
 }
 
+// Get System CPU Percentage
+
+function sysCpuPercentageFunction () {
+	exec('cmd /c .\bat\cpuPercentage.bat 2>&1', $sysCpuPercentageoutput, $sysCpuPercentagevalue);
+	return $sysCpuPercentageoutput[1];
+}
+	
+// Get System CPU Color
+
+function sysCpucolorFunction () {
+	exec('cmd /c .\bat\cpuPercentage.bat 2>&1', $sysCpuColoroutput, $sysCpuColorvalue);
+	
+	if ($sysCpuColoroutput[1] <= 20) {
+		return $sysCpuColoroutput[1]."%;background-color: #00bf00";
+	} else if ($sysCpuColoroutput[1] > 20 && $sysCpuColoroutput[1] <= 40) {
+		return $sysCpuColoroutput[1]."%;background-color: #84c300";
+	} else if ($sysCpuColoroutput[1] > 40 && $sysCpuColoroutput[1] <= 60) {
+		return $sysCpuColoroutput[1]."%;background-color: #f5ca01";
+	} else if ($sysCpuColoroutput[1] > 60 && $sysCpuColoroutput[1] <= 80) {
+		return $sysCpuColoroutput[1]."%;background-color: #fb7901";
+	} else if ($sysCpuColoroutput[1] > 80 && $sysCpuColoroutput[1] <= 100) {
+		return $sysCpuColoroutput[1]."%;background-color: #ff2e2e";
+	}
+	
+}
+
 // Get System Cpu Architecture
 
 function sysCpuarchitectureFunction() {
@@ -172,6 +198,13 @@ function sysRamslotFunction() {
 	
 }
 
+// Get Ram Current % Usage
+
+function sysRamPercentageFunction () {
+	exec('cmd /c .\bat\ramPercentage.bat 2>&1', $sysRamPercentageoutput, $sysRamPercentagevalue);
+	return substr($sysRamPercentageoutput[1] / 1024 / 1024 ." GB", 0, 5);
+}
+
 // Get System Ram Slots
 
 function sysRamddrtypeFunction() {
@@ -207,7 +240,7 @@ function sysRamfactortypeFunction() {
 
 }
 
-// Get System Battery Percentage
+// Get System Battery Color
 
 function sysBatterynumberFunction() {
 	exec('cmd /c .\bat\sysBattery.bat 2>&1', $sysBatteryoutput, $sysBatteryvalue);
@@ -232,6 +265,26 @@ function sysBatterycolorFunction() {
 	}
 }
 
+// Get System Ram Color
+
+function sysRamcolorFunction() {
+	$returnObject = (sysRamSizeFunction() - sysRamPercentageFunction()) * 100 / sysRamSizeFunction();
+	
+	if (sysRamSizeFunction() - sysRamPercentageFunction() <= 20) {
+		return $returnObject."%;background-color: #00bf00";
+	} else if ($sysRamSizeFunction() - sysRamPercentageFunction() <= 40) {
+		return $returnObject."%;background-color: #84c300";
+	} else if (sysRamSizeFunction() - sysRamPercentageFunction() <= 60) {
+		return $returnObject."%;background-color: #f5ca01";
+	} else if (sysRamSizeFunction() - sysRamPercentageFunction() <= 80) {
+		return $returnObject."%;background-color: #fb7901";
+	} else if (sysRamSizeFunction() - sysRamPercentageFunction() <= 100) {
+		return $returnObject."%;background-color: #ff2e2e";
+	}
+	
+	
+}
+
 // Get System Ram Size in GB
 
 function sysRamSizeFunction() {
@@ -248,7 +301,7 @@ function sysRamSizeFunction() {
 
 	$ramCapacity = $ramCapacity/1073741824;
 	
-	return $ramCapacity." GB";
+	return $ramCapacity;
 
 }
 
