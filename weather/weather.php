@@ -8,11 +8,11 @@ function weather() {
 	// Get Day / Night
 	
 	$hour = date('H');
-		
-	if ($hour >= 21) {
+			
+	if ($hour >= 21 || $hour <= 5) {
 		$dayStatus = "weather-night";
 		$dayText = "Night";
-	} else if ($hour >= 7) {
+	} else if ($hour >= 6 || $hour < 21) {
 		$dayStatus = "weather-day";
 		$dayText = "Day";
 	}
@@ -23,6 +23,7 @@ function weather() {
 	$lat = "41.390205";
 	$lon = "2.154007";
 	$apiUrl = "http://api.openweathermap.org/data/2.5/onecall?lat=".$lat."&lon=".$lon."&units=metric&exclude=hourly,minutely,current&lang=en&appid=" . $apiKey;
+	
 	$weather = file_get_contents($apiUrl);
 	$weatherContent = json_decode($weather, true);
 
